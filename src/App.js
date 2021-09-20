@@ -1,22 +1,23 @@
-import logo from './logo.svg';
+import React, {useEffect} from 'react';
 import './App.css';
+import { collection, getDoc } from 'firebase/firestore';
+import db from './firebase/firebaseConfig';
 
 function App() {
+  useEffect(() => {
+    const obtenerDatos = async() => {
+      const datos = await getDoc(collection(db, 'locales'));
+      datos.forEach(element => {
+        console.log(element.data());
+      });
+      
+    }
+    obtenerDatos();
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h4>Firebase 9!</h4>
       </header>
     </div>
   );
