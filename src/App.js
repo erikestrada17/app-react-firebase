@@ -1,27 +1,16 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import { collection, getDoc, doc } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import db from './firebase/firebaseConfig';
 
-function App() {
+const App = () => {
   useEffect(() => {
     
-    const dbRef = collection(db, "locales");
     const obtenerDatos = async() => {
-      const docRef = doc(dbRef);
-      const docSnap = await getDoc(docRef);
-      // const dbRef = collection(db, 'locales')
-      // const datos = await getDoc(dbRef);
-      // datos.forEach(element => {
-      //   console.log(element.data());
-      // });
-      if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-      
+      const datos = await getDocs(collection(db, 'locales'));
+      datos.forEach((documento) => {
+        console.log(documento.data());
+      });
     }
     
     obtenerDatos();
@@ -36,3 +25,15 @@ function App() {
 }
 
 export default App;
+
+/*Cloud Firestore:Reglas (recordar actualizar)
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if
+          request.time < timestamp.date(2021, 10, 22);
+    }
+  }
+}
+*/
