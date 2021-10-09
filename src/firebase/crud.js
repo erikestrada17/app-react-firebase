@@ -1,13 +1,18 @@
 import { collection, getDocs, query, where, addDoc, doc, updateDoc } from "firebase/firestore";
 import db from './firebaseConfig';
 
-import { store } from './firebaseconfig'
-
-const db = store
-
 class CRUD {
     getAll() {
         return db;
+    }
+
+    getLocales() {
+        const obtenerDatos = async() => {
+            const datos = await getDocs(collection(db, 'locales'));
+            datos.forEach((documento) => {
+                console.log(documento.data());
+            });
+        }
     }
 
     create(name) {

@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import './App.css';
 import { collection, getDocs } from 'firebase/firestore';
 import db from './firebase/firebaseConfig';
+import crud from './firebase/crud';
 
 const App = () => {
   useEffect(() => {
@@ -14,6 +15,12 @@ const App = () => {
     }
     
     obtenerDatos();
+    crud.getLocales();
+    console.log('p1');
+    crud.getLocales();
+    console.log('p1');
+
+
   }, []);
   return (
     <div className="App">
