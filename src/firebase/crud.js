@@ -1,31 +1,20 @@
-import { collection, getDocs, query, where, addDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import db from './firebaseConfig';
 
-class CRUD {
-    getAll() {
-        return db;
-    }
-
-    getLocales() {
-        const obtenerDatos = async() => {
-            const datos = await getDocs(collection(db, 'locales'));
-            datos.forEach((documento) => {
-                console.log(documento.data());
-            });
-        }
-    }
-
-    create(name) {
-        return db.add(name);
-    }
-
-    update(id, value) {
-        return db.doc(id).update(value);
-    }
-
-    delete(id) {
-        return db.doc(id).delete();
-    }
+const read = async (entidad) => {
+    const datos = await getDocs(collection(db, entidad));
+    console.log('prueba de read()')
+    datos.forEach((documento) => {
+        console.log(documento.data());
+    });
 }
 
-export default new CRUD();
+const getLocales = async() => {
+        const datos = await getDocs(collection(db, 'locales'));
+        console.log('prueba de getLocales')
+        datos.forEach((documento) => {
+            console.log(documento.data());
+        });
+}
+
+export {read, getLocales}
