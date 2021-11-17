@@ -8,13 +8,13 @@ import crud2 from './firebase/crud2';
 const App = () => {
   useEffect(() => {
     
-    const docE = 0
+    const docE = null
     const obtenerDatos = async() => {
       console.log('prueba de obtenerDatos');
       const datos = await getDocs(collection(db, 'prueba'));
       datos.forEach((documento) => {
         console.log(documento.data());
-        docE = documento.data()
+        /*docE = documento.data()*/
       });
     }
 
@@ -29,14 +29,20 @@ const App = () => {
     
     obtenerDatos();
 
-    crud2.getLocalesTest();
-
-    const docRefe = crud2.read('locales')
-    let objeto = docData
-    console.log(objeto)
-    crud2.create('test', objeto) /*buscar que valores acepta addDoc() */
-    console.log(docE.id)
-    crud2.update('prueba', docE.id, docData)
+    //let coleccion = {}
+    //coleccion = crud2.read('locales')
+    //let objeto = docData
+    
+    //console.log(objeto)
+    /*crud2.create('test', objeto) /*buscar que valores acepta addDoc() */
+    /*console.log(docE.id)*/
+    /*crud2.update('prueba', docE.id, docData)*/
+   // crud2.read('locales')
+    //console.log("coleccion:")
+    //console.log(coleccion)
+    let lista = crud2.read('locales')
+    console.log("LLLLLLLLLLLLLLLLLLLista "+ lista)
+    console.log(lista)
 
 
   }, []);
